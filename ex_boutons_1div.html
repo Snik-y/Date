@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Modifier une div existante</title>
+  </head>
+  <body>
+    <button id="start" class="btn btn-success">Start</button>
+    <button id="stop" class="btn btn-danger">Stop</button>
+    <button id="pause" class="btn btn-warning">Pause</button>
+    <div id="message" class="alert alert-info">Not started</div>
+    <div id="timer" class="alert alert-info">Chronomètre non démarré</div>
+
+    <ul>
+      <li><button class="day-btn" data-day="Lundi">Lundi</button></li>
+      <li><button class="day-btn" data-day="Mardi">Mardi</button></li>
+      <li><button class="day-btn" data-day="Mercredi">Mercredi</button></li>
+    </ul>
+    <div id="day-display" class="alert alert-info">Quel jour est-il ?</div>
+
+    <a id="click" href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal">Wikipédia</a>
+    <div id="click-display" class="alert alert-info">Message auto</div>
+
+    <div class="ex_saturation">
+      <img id="image" src="OIP.jpg" alt="Image" class="img">
+      <div class="input_saturation">
+        <label for="saturation">Changer la saturation (0-100) :</label>
+        <input type="range" id="saturation" class="form-control" min="0" max="100" value="100">
+      </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    let messageDiv = document.querySelector('#message');
+    let timerDiv = document.querySelector('#timer');
+    let timer;
+    let startTime;
+    let elapsedTime = 0;
+    let isPaused = false;
+
+    function startTimer() {
+        startTime = Date.now() - elapsedTime;
+        timer = setInterval(function() {
+            elapsedTime = Date.now() - startTime;
+            timerDiv.textContent = (elapsedTime / 1000).toFixed(1) + ' secondes';
+        }, 100);
+    }
+
+    function stopTimer() {
+        clearInterval(timer);
+        elapsedTime = 0;
+        isPaused = false;
+    }
+
+    function pauseTimer() {
+        clearInterval(timer);
+        isPaused = true;
+    }
+
+    document.querySelector('#start').addEventListener('click', function() {
+        messageDiv.className = 'alert alert-success';
+        messageDiv.textContent = 'Started';
+        startTimer();
+    });
+
+    document.querySelector('#stop').addEventListener('click', function() {
+        messageDiv.className = 'alert alert-danger';
+        messageDiv.textContent = 'Stopped';
+        stopTimer();
+        timerDiv.textContent = '0 secondes';
+    });
+
+    document.querySelector('#pause').addEventListener('click', function() {
+        messageDiv.className = 'alert alert-warning';
+        messageDiv.textContent = 'Paused';
+        pauseTimer();
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    let buttons = document.querySelectorAll('.day-btn');
+    let dayDisplay = document.querySelector('#day-display');
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            let day = this.getAttribute('data-day');
+            dayDisplay.textContent = day;
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    let link = document.querySelector('#click');
+    let clickDisplay = document.querySelector('#click-display');
+
+    link.addEventListener('click', function(event) {
+        event.preventDefault();
+        clickDisplay.textContent = 'click';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    let image = document.querySelector('#image');
+    let inputsaturation = document.querySelector('#saturation');
+
+    inputsaturation.addEventListener('input', function() {
+        let saturationValue = inputsaturation.value;
+        image.style.filter = `saturate(${saturationValue}%)`;
+    });
+});
+
+    </script>
+  </body>
+</html>
+ 

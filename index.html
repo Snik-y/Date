@@ -51,16 +51,6 @@
             <div class="col-sm-8">
 
                 <select class="date form-control">
-                    <script>
-                    // Ajouter les dates au sélecteur
-                    let dateSelect = document.querySelector('.date');
-                    datesToDisplay.forEach(function(date) {
-                        let option = document.createElement('option');
-                        option.value = date.value;
-                        option.textContent = date.value;
-                        dateSelect.appendChild(option);
-                    });
-                    </script>
                 </select>
 
             </div>
@@ -86,45 +76,8 @@
     </fieldset>
 
     <a href="#" disabled title="Ajouter une autre réservation" id="add" class="btn btn-primary disabled">+</a>
-    <script>
-    // Activer le bouton "add" et gérer les dates réservées
-    document.querySelector('#add').addEventListener('click', function(event) {
-        event.preventDefault();
-        let newFieldset = document.querySelector('.fieldset').cloneNode(true);
-        newFieldset.querySelector('.date').value = '';
-        newFieldset.querySelector('.quantite').value = '1';
-        document.querySelector('form').insertBefore(newFieldset, document.querySelector('#add'));
-        // Retirer la date réservée du sélecteur
-        let selectedDate = dateSelect.value;
-        datesToDisplay = datesToDisplay.filter(function(date) {
-            return date.value !== selectedDate;
-        });
-        dateSelect.innerHTML = '';
-        datesToDisplay.forEach(function(date) {
-            let option = document.createElement('option');
-            option.value = date.value;
-            option.textContent = date.value;
-            dateSelect.appendChild(option);
-        });
-    });
-    // Activer le bouton "add"
-    document.querySelector('#add').classList.remove('disabled');
-    </script>
 
     <input type="submit" class="btn btn-outline-success" value="Enregistrer les réservations"/>
-    <script>
-            // Enregistrer les réservations
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        let reservations = [];
-        document.querySelectorAll('.fieldset').forEach(function(fieldset) {
-            let date = fieldset.querySelector('.date').value;
-            let quantite = fieldset.querySelector('.quantite').value;
-            reservations.push({date: date, quantite: quantite});
-        });
-        console.log('Réservations enregistrées:', reservations);
-    });
-    </script>
 
     </form>
 

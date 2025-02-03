@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="app.js" defer></script>
+    <title>Button Start Example</title>
+  </head>
+  <body>
+    <button id="start" class="bouton">Start</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('#start').addEventListener('click', function() {
+        let alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success';
+        alertDiv.textContent = 'Started';
+        document.body.appendChild(alertDiv);
+    });
+});
+    </script>
+    <button id="stop" class="bouton">Stop</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('#stop').addEventListener('click', function() {
+        let alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-danger';
+        alertDiv.textContent = 'Stoped';
+        document.body.appendChild(alertDiv);
+    });
+});
+    </script>
+    <button id="paused" class="bouton">Paused</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('#paused').addEventListener('click', function() {
+        let alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-warning';
+        alertDiv.textContent = 'Paused';
+        document.body.appendChild(alertDiv);
+    });
+});
+    </script>
+  </body>
+</html>
